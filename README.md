@@ -1,0 +1,1 @@
+Una futura versión, podría incluir el guardado de la lista de favoritos de forma persistente, ya sea usando el Storage, una base de datos sqlite interna o recuperando la lista de un servicio externo cada vez que se inicie la app (como podría ser Firebase Cloud Storage).

@@ -25,6 +25,9 @@ export class ProfilePage implements OnInit, ViewWillEnter {
     url: '',
     created: undefined
   };
+
+  charactersFavs : Result[] = [];
+
   constructor(private apiService : ApiService) {
     
   }
@@ -34,6 +37,14 @@ export class ProfilePage implements OnInit, ViewWillEnter {
 
   ngOnInit() {
     this.character = this.apiService.getCurrentCharacter();
+    this.charactersFavs = this.apiService.getfavsListInitial();
+  }
+
+  addCharacter(character : any){
+    this.apiService.addToFavsList(character);
+  }
+  removeCharacter(character : any){
+    this.apiService.removeFromFavsList(character);
   }
 
 }

@@ -1,5 +1,5 @@
-<ion-header>
-  <ion-toolbar>
+<ion-header >
+  <ion-toolbar >
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -19,5 +19,8 @@
       is {{character.species}} and lives in {{character.location.name}}.
 
     </ion-card-content>
+
+    <ion-button *ngIf="!charactersFavs.includes(character)" (click)="addCharacter(character)"> Add to favs</ion-button>
+      <ion-button *ngIf="charactersFavs.includes(character)" (click)="removeCharacter(character)">Remove from favs</ion-button>
   </ion-card>
 </ion-content>

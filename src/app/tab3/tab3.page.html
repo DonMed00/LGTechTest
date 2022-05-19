@@ -1,16 +1,13 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Filter by name
-    </ion-title>
+    <ion-title>List of favs</ion-title>
   </ion-toolbar>
-  <ion-searchbar [(ngModel)]="searchQuery" (ionChange)="changeSearch()" placeholder="Enter a character name..."></ion-searchbar>
-
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content>
   <ion-list>
-    <ion-item *ngFor="let character of characters.results" >
+    
+    <ion-item *ngFor="let character of charactersFavs" >
       <ion-avatar slot="start" (click)="viewProfile(character)">
         <img [src]="character.image" />
       </ion-avatar>
@@ -19,11 +16,12 @@
         <h3>{{character.species}}</h3>
         <p>{{character.status}}</p>
         <p>From: {{character.origin.name}}</p>
+
       </ion-label>
+      <ion-button (click)="removeCharacter(character)">Remove</ion-button>
     </ion-item>
   </ion-list>
-  
-  <div class="ion-text-center"  *ngIf="characters.results.length == 0">
-    <ion-label>Not characters found.</ion-label>
+  <div class="ion-text-center"  *ngIf="charactersFavs.length == 0">
+    <ion-label>Not characters added.</ion-label>
   </div>
 </ion-content>

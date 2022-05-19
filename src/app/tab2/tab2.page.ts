@@ -16,6 +16,9 @@ export class Tab2Page implements OnInit, ViewWillEnter {
     results: []
   };
 
+  charactersFavs : Result[];
+
+
   searchQuery : string = "";
   constructor(private apiService : ApiService, private router: Router) {}
   ionViewWillEnter(): void {
@@ -24,11 +27,14 @@ export class Tab2Page implements OnInit, ViewWillEnter {
 
 
   ngOnInit(): void {
+    //this.charactersFavs = this.apiService.getfavsListInitial();
+
     this.apiService.getCharacterList().subscribe(list => {
       this.characters = list;
-      if(list.results.length == 0){
-        console.log("a")
-      }
+    })
+
+    this.apiService.getfavsList().subscribe(list => {
+      this.charactersFavs = list;
     })
 
     this.getCharacters(this.apiService.getApiUrl());
@@ -47,6 +53,13 @@ export class Tab2Page implements OnInit, ViewWillEnter {
   viewProfile(character : Result){
     this.apiService.setCurrentCharacter(character);
     this.router.navigate(['/profile']);
+  }
+
+  addCharacter(character : any){
+    this.apiService.addToFavsList(character);
+  }
+  removeCharacter(character : any){
+    this.apiService.removeFromFavsList(character);
   }
 
 }

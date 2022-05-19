@@ -21,6 +21,8 @@
         <p>From: {{character.origin.name}}</p>
 
       </ion-label>
+      <ion-button *ngIf="!charactersFavs.includes(character)" (click)="addCharacter(character)"> Add</ion-button>
+      <ion-button *ngIf="charactersFavs.includes(character)" (click)="removeCharacter(character)">Remove</ion-button>
     </ion-item>
   </ion-list>
   <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">

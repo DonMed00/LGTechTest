@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of, Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { CharacterList, Result } from '../models/CharacterList';
+import { ToastController } from '@ionic/angular';
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -13,13 +16,19 @@ export class ApiService {
   private characterList : CharacterList
   private characterList$ : Subject<CharacterList>;
 
+  private favsList : Result[]
+  private favsList$ : Subject<Result[]>;
+
   private currentCharacter : Result
-  constructor(private httpClient : HttpClient) {
+  constructor(private httpClient : HttpClient, public toastController: ToastController) {
     this.characterList = {
       info: undefined,
       results: []
     }
     this.characterList$ = new Subject();
+    this.favsList = [];
+    this.favsList$ = new Subject();
+
    }
 
 
@@ -44,6 +53,33 @@ export class ApiService {
   }
 
 
+  
+  
+  async addToFavsList(character : Result){
+    this.favsList.push(character);
+    this.favsList$.next(this.favsList);
+    this.presentToast(character.name + " added to favs.")
+  }
+  removeFromFavsList(character : Result){
+    this.favsList.splice(this.favsList.indexOf(character),1);
+    this.favsList$.next(this.favsList);
+    this.presentToast(character.name + " removed from favs.")
+
+  }
+
+
+  async presentToast(text : string) {
+    const toast = await this.toastController.create({
+      message: text,
+      duration: 2000
+    });
+    toast.present();
+  }
+
+
+  //GETTERS - SETTERS
+  
+
   setCharacterList(newCharacterList : CharacterList){
     this.characterList = newCharacterList;
     this.characterList$.next(this.characterList);
@@ -65,4 +101,15 @@ export class ApiService {
     return this.apiUrl;
   }
 
+
+  getfavsList(){
+    return this.favsList$.asObservable();
+  }
+  getfavsListInitial(){
+    return this.favsList;
+  }
+  setFavsList(favsList : Result[]){
+    this.favsList = favsList;
+    this.favsList$.next(this.favsList);
+  }
 }

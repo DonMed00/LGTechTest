@@ -19,14 +19,22 @@ export class Tab1Page implements OnInit {
     results: []
   };
 
+  charactersFavs : Result[] = [];
+
 
   constructor(private apiService : ApiService, private router: Router) {
   }
 
   ngOnInit(): void {
+    //this.charactersFavs = this.apiService.getfavsListInitial();
+
     this.apiService.getCharacterList().subscribe(list => {
       this.characters.info = list.info;
       this.characters.results = this.characters.results.concat(list.results);
+    })
+
+    this.apiService.getfavsList().subscribe(list => {
+      this.charactersFavs = list;
     })
 
     this.getCharacters(this.apiService.getApiUrl());
@@ -58,8 +66,11 @@ export class Tab1Page implements OnInit {
     this.router.navigate(['/profile']);
   }
 
-  addToFav(character : any){
-    console.log(character)
+  addCharacter(character : any){
+    this.apiService.addToFavsList(character);
+  }
+  removeCharacter(character : any){
+    this.apiService.removeFromFavsList(character);
   }
 
   toggleInfiniteScroll() {
