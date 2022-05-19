@@ -32,7 +32,14 @@ export class ApiService {
 
   async filterCharacter(filter : string){
     await this.httpClient.get<CharacterList>(environment.apiUrl + "/character/?name=" + filter).subscribe(characters => {
-      this.setCharacterList(characters);
+      
+    this.setCharacterList(characters);
+
+    }, error => {
+        this.setCharacterList({
+        info: undefined,
+        results: []
+      });
     });
   }
 

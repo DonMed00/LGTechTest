@@ -9,11 +9,12 @@
 <ion-content >
  
   <ion-list>
-    <ion-item *ngFor="let character of characters.results" (click)="viewProfile(character)">
-      <ion-avatar slot="start">
+    
+    <ion-item *ngFor="let character of characters.results" >
+      <ion-avatar slot="start" (click)="viewProfile(character)">
         <img [src]="character.image" />
       </ion-avatar>
-      <ion-label>
+      <ion-label (click)="viewProfile(character)">
         <h2>{{character.name}}</h2>
         <h3>{{character.species}}</h3>
         <p>{{character.status}}</p>

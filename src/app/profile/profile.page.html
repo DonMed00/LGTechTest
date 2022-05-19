@@ -3,13 +3,21 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>profile</ion-title>
+    <ion-title>{{character.name}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-avatar >
+  <ion-card style="text-align: center; height: 97%;">
     <img [src]="character.image" />
-  </ion-avatar>
-  <ion-label>{{character.name}}</ion-label>
+    <ion-card-header>
+      <ion-card-title>{{character.name}}</ion-card-title>
+      <ion-card-subtitle>Character nº{{character.id}}<br>{{character.status}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      {{character.name}} appears in {{character.episode.length}} episodes,<br>
+      is {{character.species}} and lives in {{character.location.name}}.
+
+    </ion-card-content>
+  </ion-card>
 </ion-content>

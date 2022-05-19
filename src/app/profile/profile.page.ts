@@ -13,14 +13,14 @@ export class ProfilePage implements OnInit, ViewWillEnter {
 
   character : Result = {
     id: 0,
-    name: '',
-    status: '',
-    species: '',
+    name: 'Rick',
+    status: 'Dead',
+    species: 'Human',
     type: '',
-    gender: '',
+    gender: 'Male',
     origin: undefined,
     location: undefined,
-    image: '',
+    image: "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
     episode: [],
     url: '',
     created: undefined
@@ -34,7 +34,6 @@ export class ProfilePage implements OnInit, ViewWillEnter {
 
   ngOnInit() {
     this.character = this.apiService.getCurrentCharacter();
-    console.log(this.apiService.getCurrentCharacter());
   }
 
 }

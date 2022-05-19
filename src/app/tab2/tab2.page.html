@@ -1,10 +1,10 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 2
+      Filter by name
     </ion-title>
   </ion-toolbar>
-  <ion-searchbar [(ngModel)]="searchQuery" (ionChange)="changeSearch()"></ion-searchbar>
+  <ion-searchbar [(ngModel)]="searchQuery" (ionChange)="changeSearch()" placeholder="Enter a character name..."></ion-searchbar>
 
 </ion-header>
 
@@ -23,4 +23,8 @@
       </ion-label>
     </ion-item>
   </ion-list>
+  
+  <div class="ion-text-center"  *ngIf="characters.results.length == 0">
+    <ion-label>Not characters found.</ion-label>
+  </div>
 </ion-content>

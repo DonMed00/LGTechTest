@@ -19,7 +19,6 @@ export class Tab1Page implements OnInit {
     results: []
   };
 
-  
 
   constructor(private apiService : ApiService, private router: Router) {
   }
@@ -57,6 +56,10 @@ export class Tab1Page implements OnInit {
   viewProfile(character : Result){
     this.apiService.setCurrentCharacter(character);
     this.router.navigate(['/profile']);
+  }
+
+  addToFav(character : any){
+    console.log(character)
   }
 
   toggleInfiniteScroll() {

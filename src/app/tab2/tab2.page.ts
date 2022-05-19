@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ViewWillEnter } from '@ionic/angular';
 import { CharacterList, Result } from '../core/models/CharacterList';
 import { ApiService } from '../core/services/api.service';
 
@@ -8,7 +9,7 @@ import { ApiService } from '../core/services/api.service';
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss']
 })
-export class Tab2Page implements OnInit {
+export class Tab2Page implements OnInit, ViewWillEnter {
 
   characters : CharacterList = {
     info: undefined,
@@ -17,11 +18,17 @@ export class Tab2Page implements OnInit {
 
   searchQuery : string = "";
   constructor(private apiService : ApiService, private router: Router) {}
+  ionViewWillEnter(): void {
+    this.searchQuery = ""
+  }
 
 
   ngOnInit(): void {
     this.apiService.getCharacterList().subscribe(list => {
       this.characters = list;
+      if(list.results.length == 0){
+        console.log("a")
+      }
     })
 
     this.getCharacters(this.apiService.getApiUrl());
